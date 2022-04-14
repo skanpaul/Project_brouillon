@@ -21,15 +21,14 @@ int main(void)
 	// --------------------------------------
 	
 	init_minishell(&d);
-	sigaction(SIGUSR1, &d.sa, NULL);
-	sigaction(SIGKILL, &d.sa, NULL);
+	sigaction(SIGINT, &d.sa, NULL);
 	// sigaction(, &d.sa, NULL);
 	sigaction(SIGQUIT, &d.sa, NULL);
 	
 	while(1)
 	{
 		printf("pid: %d\n", getpid());
-		d.new_line = readline("SKI_SHELL>");
+		d.new_line = readline(MSG_PROMPT);
 		free(d.new_line);
 	}
 	return (0);
@@ -38,15 +37,12 @@ int main(void)
 /* ************************************************************************** */
 void	signal_handler(int sig_code)
 {
-	if (sig_code == SIGUSR1)
-	{
-		printf(" SIGUSER1 >\n");
-		printf("SKI_SHELL>");	
-	}
-		
 	// ctrl-C -----------------------------
-	if (sig_code == SIGKILL)
-		printf("sorakann: SIGKILL\n");
+	if (sig_code == SIGINT)
+	{
+		// printf("\n%s", MSG_PROMPT);
+		write(1, MSG_SIGINT, strlen(MSG_SIGINT));
+	}
 				
 	// ctrl-D -----------------------------
 	// else if (sig_code == )
@@ -54,7 +50,10 @@ void	signal_handler(int sig_code)
 		
 	// ctrl-\ -----------------------------
 	else if (sig_code == SIGQUIT)
-		printf("sorakann: SIGQUIT\n");
+	{
+		// printf("SIGQUIT\n");
+		write(1, MSG_SIGQUIT, strlen(MSG_SIGQUIT));
+	}
 	
 }
 /* ************************************************************************** */
@@ -65,8 +64,8 @@ void init_minishell(t_data *d)
 	d->sa.sa_handler = &signal_handler;
 	d->sa.sa_flags = SA_RESTART;
 	sigemptyset(&d->sa.sa_mask);
-	sigaddset(&d->sa.sa_mask, SIGUSR1);
-	sigaddset(&d->sa.sa_mask, SIGKILL);
+	sigaddset(&d->sa.sa_mask, SIGINT);
+
 	sigaddset(&d->sa.sa_mask, SIGQUIT);
 	
 
