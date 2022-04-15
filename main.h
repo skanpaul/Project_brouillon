@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:35:43 by ski               #+#    #+#             */
-/*   Updated: 2022/04/13 16:42:25 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/15 09:11:15 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@
 # define MSG_PROMPT		"SKI_SHELL>"
 # define MSG_SIGINT		"\nSKI_SHELL>"
 # define MSG_SIGQUIT	"\nSIGQUIT"
-
-
 /* ************************************************************************** */
-
 typedef struct s_data
 {
 	char				*new_line;
@@ -37,11 +34,8 @@ typedef struct s_data
 
 } t_data;
 /* ************************************************************************** */
-
 void	signal_handler(int sig_code);
 void	init_minishell(t_data *d);
-
-
 
 /* ************************************************************************** */
 #endif

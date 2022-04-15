@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   signal_handler.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 11:48:10 by ski               #+#    #+#             */
-/*   Updated: 2022/04/15 09:09:44 by sorakann         ###   ########.fr       */
+/*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
+/*   Updated: 2022/04/15 09:10:14 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
 /* ************************************************************************** */
-int main(void)
+void	signal_handler(int sig_code)
 {
-	t_data d;
-	// --------------------------------------
-	d.new_line = NULL;
-	// --------------------------------------
-	
-	init_minishell(&d);
-	sigaction(SIGINT, &d.sa, NULL);
-	// sigaction(, &d.sa, NULL);
-	sigaction(SIGQUIT, &d.sa, NULL);
-	
-	// --------------------------------------
-	while(1)
+	// ctrl-C -----------------------------
+	if (sig_code == SIGINT)
 	{
-		printf("pid: %d\n", getpid());
-		d.new_line = readline(MSG_PROMPT);
-		free(d.new_line);
+		// printf("\n%s", MSG_PROMPT);
+		write(1, MSG_SIGINT, strlen(MSG_SIGINT));
 	}
-	// --------------------------------------
-	return (0);
-}
+				
+	// ctrl-D -----------------------------
+	// else if (sig_code == )
+	// 	printf("sorakann: \n");
+		
+	// ctrl-\ -----------------------------
+	else if (sig_code == SIGQUIT)
+	{
+		// printf("SIGQUIT\n");
+		write(1, MSG_SIGQUIT, strlen(MSG_SIGQUIT));
+	}
 	
+}
+
 /* ************************************************************************** */

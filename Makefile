@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
+#    By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:37:50 by ski               #+#    #+#              #
-#    Updated: 2022/04/13 14:15:15 by ski              ###   ########.fr        #
+#    Updated: 2022/04/15 09:12:45 by sorakann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ CFLAG	= -Wall -Wextra -Werror
 
 RM		= rm -f
 
-SRC1	= minishell.c
+SRC1	= 	minishell.c\
+			initialisation.c\
+			signal_handler.c
 OBJ1	= $(SRC1:.c=.o)
 
 SRC2	= main.c

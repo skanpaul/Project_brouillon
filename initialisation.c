@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 11:48:10 by ski               #+#    #+#             */
-/*   Updated: 2022/04/15 09:09:44 by sorakann         ###   ########.fr       */
+/*   Created: 2022/04/15 09:08:25 by sorakann          #+#    #+#             */
+/*   Updated: 2022/04/15 09:09:12 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
 /* ************************************************************************** */
-int main(void)
+void init_minishell(t_data *d)
 {
-	t_data d;
-	// --------------------------------------
-	d.new_line = NULL;
-	// --------------------------------------
+	d->new_line = NULL;
+	//-------------------------------------
+	d->sa.sa_handler = &signal_handler;
+	d->sa.sa_flags = SA_RESTART;
+	sigemptyset(&d->sa.sa_mask);
+	sigaddset(&d->sa.sa_mask, SIGINT);
+
+	sigaddset(&d->sa.sa_mask, SIGQUIT);
 	
-	init_minishell(&d);
-	sigaction(SIGINT, &d.sa, NULL);
-	// sigaction(, &d.sa, NULL);
-	sigaction(SIGQUIT, &d.sa, NULL);
-	
-	// --------------------------------------
-	while(1)
-	{
-		printf("pid: %d\n", getpid());
-		d.new_line = readline(MSG_PROMPT);
-		free(d.new_line);
-	}
-	// --------------------------------------
-	return (0);
+
+	//-------------------------------------
+	// d->sa.sa_handler = &handler_sig_usr;
+	// d->sa.sa_flags = SA_RESTART;
+	// sigemptyset(&d->sa.sa_mask);
+	// sigaddset(&d->sa.sa_mask, SIGUSR1);
+	// sigaddset(&d->sa.sa_mask, SIGUSR2);
 }
-	
+
 /* ************************************************************************** */
