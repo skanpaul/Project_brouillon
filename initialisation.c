@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:08:25 by sorakann          #+#    #+#             */
-/*   Updated: 2022/04/15 11:55:18 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/15 15:14:09 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void init_minishell(t_data *d)
 {
 	d->new_line = NULL;
-    init_signal(d);
+    // init_signal(d);
 	
 }
 
@@ -40,12 +40,6 @@ void	init_signal(t_data *d)
     sigaction(SIGQUIT, &d->struct_sigquit, NULL);	
 
 	//-------------------------------------
-	// d->sa.sa_handler = &handler_sig_usr;
-	// d->sa.sa_flags = SA_RESTART;
-	// sigemptyset(&d->sa.sa_mask);
-	// sigaddset(&d->sa.sa_mask, SIGUSR1);
-	// sigaddset(&d->sa.sa_mask, SIGUSR2);
-
-    
+   
 }
 /* ************************************************************************** */

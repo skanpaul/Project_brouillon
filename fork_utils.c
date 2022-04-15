@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*   fork_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/15 09:09:38 by sorakann          #+#    #+#             */
-/*   Updated: 2022/04/15 13:46:12 by ski              ###   ########.fr       */
+/*   Created: 2022/04/15 13:49:59 by ski               #+#    #+#             */
+/*   Updated: 2022/04/15 13:54:35 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
 /* ************************************************************************** */
-void	handler_sigint(int sig_code)
+bool is_child(pid_t fk_id)
 {
-	// printf("SIGNAL: %d\n", sig_code);
-	write(1, MSG_SIGINT, strlen(MSG_SIGINT));
+	if (fk_id == FK_CHILD)
+		return (true);	
+	return (false);
 }
-
 /* ************************************************************************** */
-void	handler_sigquit(int sig_code)
+bool is_parent(pid_t fk_id)
 {
-	// printf("SIGNAL: %d\n", sig_code);
-	// write(1, MSG_SIGQUIT, strlen(MSG_SIGQUIT));
+	if (fk_id != FK_CHILD && fk_id != FK_ERROR)
+		return (true);	
+	return (false);
 }
-
 /* ************************************************************************** */
