@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialisation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 09:08:25 by sorakann          #+#    #+#             */
-/*   Updated: 2022/04/15 09:32:05 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/15 11:55:18 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void init_minishell(t_data *d)
 void	init_signal(t_data *d)
 {
     //ctrl-C: SIGINT -------------------------------------
-    d->struct_sigint.sa_handler = &signal_handler;
+    d->struct_sigint.sa_handler = &handler_sigint;
     sigemptyset(&d->struct_sigint.sa_mask);
     sigaddset(&d->struct_sigint.sa_mask, SIGINT);
     sigaddset(&d->struct_sigint.sa_mask, SIGQUIT);
@@ -32,7 +32,7 @@ void	init_signal(t_data *d)
     sigaction(SIGINT, &d->struct_sigint, NULL);	
     
     //ctrl-\: SIGQUIT -----------------------------------
-    d->struct_sigquit.sa_handler = &signal_handler;
+    d->struct_sigquit.sa_handler = &handler_sigquit;
     sigemptyset(&d->struct_sigquit.sa_mask);
     sigaddset(&d->struct_sigquit.sa_mask, SIGINT);
     sigaddset(&d->struct_sigquit.sa_mask, SIGQUIT);
