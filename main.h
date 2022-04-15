@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:35:43 by ski               #+#    #+#             */
-/*   Updated: 2022/04/15 09:11:15 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/15 09:19:21 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 typedef struct s_data
 {
 	char				*new_line;
-	struct sigaction	sa;	
+	struct sigaction	struct_sigint;	
+	struct sigaction	struct_sigquit;	
 	// autre variable
 	// autre variable
 
@@ -36,6 +37,7 @@ typedef struct s_data
 /* ************************************************************************** */
 void	signal_handler(int sig_code);
 void	init_minishell(t_data *d);
+void	init_signal(t_data *d);
 
 /* ************************************************************************** */
 #endif

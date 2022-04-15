@@ -6,7 +6,7 @@
 /*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:48:10 by ski               #+#    #+#             */
-/*   Updated: 2022/04/15 09:09:44 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/15 09:15:52 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ int main(void)
 	// --------------------------------------
 	
 	init_minishell(&d);
-	sigaction(SIGINT, &d.sa, NULL);
-	// sigaction(, &d.sa, NULL);
-	sigaction(SIGQUIT, &d.sa, NULL);
 	
 	// --------------------------------------
 	while(1)
