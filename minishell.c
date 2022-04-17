@@ -3,21 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:48:10 by ski               #+#    #+#             */
-/*   Updated: 2022/04/17 17:52:03 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/17 20:39:09 by sorakann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
 /* ************************************************************************** */
-int main(void)
+int main(int argc, char **argv, char **envp)
 {
+	(void)argc;
+	(void)argv;
 	t_data d;
 	pid_t fk_id;
 	char *arg_exec[] = {"./main", NULL};	
+
+	char *inputrc;
+
+	inputrc = getenv("INPUTRC");
+	printf("Salut: %s\n", inputrc);
 
 	d.new_line = NULL;
 	
