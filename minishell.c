@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:48:10 by ski               #+#    #+#             */
-/*   Updated: 2022/04/17 15:00:47 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/17 17:52:03 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,49 +16,32 @@
 int main(void)
 {
 	t_data d;
-
 	pid_t fk_id;
 	char *arg_exec[] = {"./main", NULL};	
 
-	init_sa_struct_main(&d);
-	init_sa_struct_prog(&d);
+	d.new_line = NULL;
 	
-	fk_id = fork();	
-	//-------------------------------------------------------
-	if (is_parent(fk_id))
-	{
-		printf("parent PID %d\n", getpid());
-		init_sigaction_main(&d);
-		wait(NULL);
-		printf("PARENT: code finished\n");
-	}
+	init_sa_struc_main(&d);
+	init_sigaction_main(&d);
 	
 	//-------------------------------------------------------
-	if (is_child(fk_id))
+	while (1)
 	{
-		d.new_line = NULL;
+		d.new_line = readline(MSG_PROMPT);
+		// if (strcmp(d.new_line, CMD_EXIT) == SAME_STRING)
+		// 	break;
 		
-		
-		printf("child PID %d\n", getpid());
-		init_sigaction_prog(&d);	
-
-		
-		while(1)
-		{
-			d.new_line = readline(MSG_PROMPT);
-			
-			// if (strcmp(d.new_line, CMD_MAIN) == STRCMP_EQU)
-			// 	execve(CMD_MAIN, arg_exec, NULL);
-				
-			// else if ( strcmp(d.new_line, CMD_EXIT) == STRCMP_EQU)
-			// 	break;
-			
+		if (d.new_line)
 			free(d.new_line);
-		}
-		printf("CHILD: code finished\n");
 	}
 	//-------------------------------------------------------
+	
 	return (0);
 }
 	
 /* ************************************************************************** */
+
+
+
+
+

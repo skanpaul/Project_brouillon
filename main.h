@@ -6,7 +6,7 @@
 /*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:35:43 by ski               #+#    #+#             */
-/*   Updated: 2022/04/17 13:54:20 by ski              ###   ########.fr       */
+/*   Updated: 2022/04/17 16:37:58 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,20 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 //---------------------------------
-# include <sys/types.h>                                                                  
+# include <sys/types.h>
 # include <sys/wait.h> 
 /* ************************************************************************** */
 # include <signal.h>
 /* ************************************************************************** */
-# define MSG_PROMPT		"ski_shell> "
+# define MSG_PROMPT			"ski_shell> "
+// ----------------------------------------
+# define MSG_SIGINT_MAIN	"\n\b\bski_shell> "
+# define MSG_SIGQUIT_MAIN	""
+// # define MSG_SIGQUIT_MAIN	"\rski_shell> "
+// ----------------------------------------
+# define MSG_SIGINT_PROG	"\nCCCC "
+# define MSG_SIGQUIT_PROG	"\nDDDD "
 
-# define MSG_A			"\n AAAA "
-# define MSG_B			"\n BBBB "
-# define MSG_C			"\n CCCC "
-# define MSG_D			"\n DDDD "
 /* ************************************************************************** */
 # define CMD_MAIN		"./main"
 # define CMD_EXIT		"exit"
@@ -40,13 +43,15 @@
 # define FK_CHILD		0
 # define FK_ERROR		-1
 /* ************************************************************************** */
-# define STRCMP_EQU		0
+# define SAME_STRING	0
 /* ************************************************************************** */
 typedef struct s_data
 {
 	char				*new_line;
 	//-------------------------------------------
-	struct sigaction	sa_signal_main;
+	struct sigaction	sa_sigint_main;
+	struct sigaction	sa_sigquit_main;
+	//-------------------------------------------
 	struct sigaction	sa_signal_prog;
 	//-------------------------------------------
 	pid_t	pid_parent;
@@ -59,7 +64,7 @@ typedef struct s_data
 void	init_minishell(t_data *d);
 
 /* ************************************************************************** */
-void	init_sa_struct_main(t_data *d);
+void	init_sa_struc_main(t_data *d);
 void	handler_signal_main(int sig_code);
 void	init_sigaction_main(t_data *d);
 
