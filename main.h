@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sorakann <sorakann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ski <ski@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 11:35:43 by ski               #+#    #+#             */
-/*   Updated: 2022/04/15 16:50:33 by sorakann         ###   ########.fr       */
+/*   Updated: 2022/04/17 13:54:20 by ski              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@
 /* ************************************************************************** */
 # include <signal.h>
 /* ************************************************************************** */
-# define MSG_PROMPT		"SKI_SHELL BOUCLE> "
-# define MSG_SIGINT		"\nSKI_SHELL> "
-# define MSG_SIGQUIT	"\nSIGQUIT "
+# define MSG_PROMPT		"ski_shell> "
+
+# define MSG_A			"\n AAAA "
+# define MSG_B			"\n BBBB "
+# define MSG_C			"\n CCCC "
+# define MSG_D			"\n DDDD "
 /* ************************************************************************** */
 # define CMD_MAIN		"./main"
 # define CMD_EXIT		"exit"
@@ -43,8 +46,8 @@ typedef struct s_data
 {
 	char				*new_line;
 	//-------------------------------------------
-	struct sigaction	struct_sigint;	
-	struct sigaction	struct_sigquit;
+	struct sigaction	sa_signal_main;
+	struct sigaction	sa_signal_prog;
 	//-------------------------------------------
 	pid_t	pid_parent;
 	pid_t	pid_process;
@@ -53,14 +56,21 @@ typedef struct s_data
 
 } t_data;
 /* ************************************************************************** */
-void	handler_sigint(int sig_code);
-void	handler_sigquit(int sig_code);
-// void	signal_handler(int sig_code);
-/* ************************************************************************** */
 void	init_minishell(t_data *d);
-void	init_signal(t_data *d);
+
+/* ************************************************************************** */
+void	init_sa_struct_main(t_data *d);
+void	handler_signal_main(int sig_code);
+void	init_sigaction_main(t_data *d);
+
+/* ************************************************************************** */
+void	init_sa_struct_prog(t_data *d);
+void	handler_signal_prog(int sig_code);
+void	init_sigaction_prog(t_data *d);
+
 /* ************************************************************************** */
 bool	is_child(pid_t fk_id);
 bool	is_parent(pid_t fk_id);
+
 /* ************************************************************************** */
 #endif

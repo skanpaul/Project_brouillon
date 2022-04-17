@@ -6,7 +6,7 @@
 #    By: ski <ski@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 11:37:50 by ski               #+#    #+#              #
-#    Updated: 2022/04/15 13:54:48 by ski              ###   ########.fr        #
+#    Updated: 2022/04/17 13:48:26 by ski              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ RM		= rm -f
 HD1		= main.h
 SRC1	= 	minishell.c\
 			initialisation.c\
-			signal_handler.c\
+			signal_utils.c\
 			fork_utils.c
 			
 OBJ1	= $(SRC1:.c=.o)
